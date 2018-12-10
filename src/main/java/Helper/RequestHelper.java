@@ -1,31 +1,18 @@
 package Helper;
 import static io.restassured.RestAssured.given;
 
+import java.util.List;
 import java.util.Map;
 
 import cucumber.api.DataTable;
+import io.restassured.http.Header;
 import io.restassured.specification.FilterableRequestSpecification;
-/**
- * 
- *Helps build an instance of FilterableRequestSpecification from a Cucumber feature file table.
- *<br>Reference in your project as follows:
- *<br>Jar should be copied to the project root location.
- *<pre>
- *{@literal <}dependency{@literal >}
- *	{@literal <}groupId{@literal >}RequestHelper.Cucumber.RestAssured{@literal <}/groupId{@literal >}
- *	{@literal <}artifactId{@literal >}Cucumber_RequestHelper{@literal <}/artifactId{@literal >}
- *	{@literal <}version{@literal >}0.0.1-SNAPSHOT{@literal <}/version{@literal >}
- *	{@literal <}scope{@literal >}system{@literal <}/scope{@literal >}
- *	{@literal <}systemPath{@literal >}${project.basedir}/RequestHelper.jar{@literal <}/systemPath{@literal >}
- *{@literal <}/dependency{@literal >}
- *<pre>
- *
- */
+
 public final class RequestHelper {
 	
 	/**
-	 * 
-	 * Requires a variable of type DataTable to be provided.
+	 * Helps build an instance of FilterableRequestSpecification from a Cucumber feature file table.
+	 * Requires a variable of type <b>cucumber.api.DataTable</b> to be provided.
 	 * When designing the feature file, the table should have the following format:
 	 * <pre>
 	 * | request_base | Your request base path, eg. https://localhost:8080/api/v1                                      |
@@ -37,6 +24,8 @@ public final class RequestHelper {
      * Request base is mandatory and can replace request_path if fully defining the request link.
      * <br>Rest of the parameters are optional and will be set as provided.
      * <br>Sets the request content and accept to application/json by default.
+     * @param data => A <b>cucumber.api.DataTable</b> variable containing the above specified elements.
+     * @return An io.restassured.specification.<b>FilterableRequestSpecification</b> object that can be used to perform HTTP requests with RestAssured/Cucumber.
 	 */
 	public static FilterableRequestSpecification buildRequest(DataTable data) {
 		FilterableRequestSpecification toReturn = (FilterableRequestSpecification) given();
@@ -70,10 +59,19 @@ public final class RequestHelper {
 			System.out.println("\tRquest path: " + toReturn.getBasePath());
 		}
 		if(requestDetails.containsKey("headers")) {
-			System.out.println("\tHeaders: " + toReturn.getHeaders());
+			System.out.println("\tHeaders:");
+			List<Header> headers = toReturn.getHeaders().asList();
+			for (int i =0; i<headers.size(); i++) {
+				System.out.println("\t\t"+headers.get(i).getName()+ ": " + headers.get(i).getValue());
+			}
 		}
 		if(requestDetails.containsKey("query_params")) {
 			System.out.println("\tQuery parameters: " + toReturn.getQueryParams());
+			Map<String,String> queryParams = toReturn.getQueryParams();
+			for (Map.Entry<String, String> entry : queryParams.entrySet())
+			{
+			    System.out.println("\t\t" + entry.getKey() + ": " + entry.getValue());
+			}
 		}
 		if(requestDetails.containsKey("post_body")) {
 			System.out.println("\tPost body: " + toReturn.getBody());
