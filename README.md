@@ -29,11 +29,15 @@ The bold text in the method is the parameter that contains the table data above 
 The method would then return a FilterableRequestSpecification which can be used to perform the HTTP request, and will print the details set in the request.
 
 Project integration:
+<p>
 Method 1:
 Build the Jar and reference it to your project.
+</p>
+<p>
 Method 2:
 Reference it to your Maven project using jitpack.io as follows:
 Add the below repository.
+</p>
 <pre>
 &lt;repositories&gt;
 	&lt;repository&gt;
