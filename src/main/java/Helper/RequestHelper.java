@@ -24,7 +24,7 @@ public final class RequestHelper {
      * Request base is mandatory and can replace request_path if fully defining the request link.
      * <br>Rest of the parameters are optional and will be set as provided.
      * <br>Sets the request content and accept to application/json by default.
-     * @param data => A <b>cucumber.api.DataTable</b> variable containing the above specified elements.
+     * @param data ={@literal >} A <b>cucumber.api.DataTable</b> variable containing the above specified elements.
      * @return An io.restassured.specification.<b>FilterableRequestSpecification</b> object that can be used to perform HTTP requests with RestAssured/Cucumber.
 	 */
 	public static FilterableRequestSpecification buildRequest(DataTable data) {
