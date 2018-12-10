@@ -66,7 +66,7 @@ public final class RequestHelper {
 			}
 		}
 		if(requestDetails.containsKey("query_params")) {
-			System.out.println("\tQuery parameters: " + toReturn.getQueryParams());
+			System.out.println("\tQuery parameters: ");
 			Map<String,String> queryParams = toReturn.getQueryParams();
 			for (Map.Entry<String, String> entry : queryParams.entrySet())
 			{
