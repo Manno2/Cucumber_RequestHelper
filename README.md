@@ -25,7 +25,7 @@ public void i_prepared_the_GET_request_for_the_users_endpoint_with(<b>DataTable 
 // Write code here that turns the phrase above into concrete actions
 }
 </pre>
-The bold text above is the parameter that contains the table data above, which should be passed to the helper method from this package.
+The bold text in the method is the parameter that contains the table data above , which should be passed to the helper method from this package.
 The method would then return a FilterableRequestSpecification which can be used to perform the HTTP request, and will print the details set in the request.
 
 Project integration:
